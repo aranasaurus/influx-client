@@ -1,0 +1,12 @@
+influx-client.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+.idea/
+xcuserdata/
+Podfile.lock
+Pods/
+Docs/docset
+Docs/docset-installed.txt
+Docs/html
+*-e
+GeotriggerSDK.xcworkspace/xcshareddata
+NamespacedDependencies.h
+build
