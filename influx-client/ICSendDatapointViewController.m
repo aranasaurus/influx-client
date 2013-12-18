@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 ESRI. All rights reserved.
 //
 
-#import "ICSendDatapointViewController.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "ICSendDatapointViewController.h"
+#import "ICInfluxDbClient.h"
 
 @interface ICSendDatapointViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *seriesField;
@@ -18,7 +19,14 @@
 
 @implementation ICSendDatapointViewController {
     MBProgressHUD *HUD;
+    ICInfluxDbClient *client;
 }
+
+static NSString* const INFLUX_HOST = @"";
+static int const INFLUX_PORT = 1234;
+static NSString* const INFLUX_USER = @"";
+static NSString* const INFLUX_PASS = @"";
+static NSString* const INFLUX_DB_NAME = @"";
 
 #pragma mark -
 #pragma mark Lifecycle methods
@@ -40,7 +48,7 @@
     self.keyField.delegate = self;
     self.valueField.delegate = self;
 
-    // TODO: create InfluxDBClient object here
+    client = [[ICInfluxDbClient alloc] initWithHost:INFLUX_HOST port:INFLUX_PORT user:INFLUX_USER pass:INFLUX_PASS dbName:INFLUX_DB_NAME];
 }
 
 - (void)didReceiveMemoryWarning
