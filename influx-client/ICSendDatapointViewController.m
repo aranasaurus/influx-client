@@ -76,7 +76,7 @@
         sleep(2);
     } else {
         HUD.mode = MBProgressHUDModeText;
-        HUD.labelText = @"Enter all 3 fields!";
+        HUD.labelText = NSLocalizedString(@"missingFieldToast", @"derp");
         HUD.margin = 10.f;
         HUD.yOffset = 150.f;
         sleep(2);

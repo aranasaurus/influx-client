@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2001C1EA1862339400BE9E8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2001C1EC1862339400BE9E8E /* Main.storyboard */; };
+		2001C20118623A1600BE9E8E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2001C20318623A1600BE9E8E /* Localizable.strings */; };
 		2011797D1860DAAC008FEFC5 /* ICSendDatapointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2011797C1860DAAC008FEFC5 /* ICSendDatapointViewController.m */; };
 		202B0A39185F7EF4003424D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 202B0A38185F7EF4003424D5 /* Foundation.framework */; };
 		202B0A3B185F7EF4003424D5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 202B0A3A185F7EF4003424D5 /* CoreGraphics.framework */; };
@@ -35,8 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2001C1ED1862339B00BE9E8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2001C1ED1862339B00BE9E8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2001C1F5186235FD00BE9E8E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		2001C20518623B4C00BE9E8E /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2011797B1860DAAC008FEFC5 /* ICSendDatapointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSendDatapointViewController.h; sourceTree = "<group>"; };
 		2011797C1860DAAC008FEFC5 /* ICSendDatapointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSendDatapointViewController.m; sourceTree = "<group>"; };
 		202B0A35185F7EF4003424D5 /* influx-client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "influx-client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +128,7 @@
 				202B0A3F185F7EF4003424D5 /* Supporting Files */,
 				2011797B1860DAAC008FEFC5 /* ICSendDatapointViewController.h */,
 				2011797C1860DAAC008FEFC5 /* ICSendDatapointViewController.m */,
+				2001C20318623A1600BE9E8E /* Localizable.strings */,
 			);
 			path = "influx-client";
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2001C1EA1862339400BE9E8E /* Main.storyboard in Resources */,
+				2001C20118623A1600BE9E8E /* Localizable.strings in Resources */,
 				202B0A43185F7EF4003424D5 /* InfoPlist.strings in Resources */,
 				202B0A4B185F7EF4003424D5 /* Images.xcassets in Resources */,
 			);
@@ -331,6 +335,14 @@
 				2001C1F5186235FD00BE9E8E /* en */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2001C20318623A1600BE9E8E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2001C20518623B4C00BE9E8E /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		202B0A41185F7EF4003424D5 /* InfoPlist.strings */ = {
