@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2001C1EA1862339400BE9E8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2001C1EC1862339400BE9E8E /* Main.storyboard */; };
 		2011797D1860DAAC008FEFC5 /* ICSendDatapointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2011797C1860DAAC008FEFC5 /* ICSendDatapointViewController.m */; };
 		202B0A39185F7EF4003424D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 202B0A38185F7EF4003424D5 /* Foundation.framework */; };
 		202B0A3B185F7EF4003424D5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 202B0A3A185F7EF4003424D5 /* CoreGraphics.framework */; };
@@ -20,7 +21,6 @@
 		202B0A54185F7EF4003424D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 202B0A3C185F7EF4003424D5 /* UIKit.framework */; };
 		202B0A5C185F7EF4003424D5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 202B0A5A185F7EF4003424D5 /* InfoPlist.strings */; };
 		202B0A5E185F7EF4003424D5 /* influx_clientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 202B0A5D185F7EF4003424D5 /* influx_clientTests.m */; };
-		208CCD691860C94100D4E02D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 208CCD681860C94100D4E02D /* Main.storyboard */; };
 		DF6012FFCB114964944B92A8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4496BC647446E48D0D21DA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2001C1ED1862339B00BE9E8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2001C1F5186235FD00BE9E8E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		2011797B1860DAAC008FEFC5 /* ICSendDatapointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSendDatapointViewController.h; sourceTree = "<group>"; };
 		2011797C1860DAAC008FEFC5 /* ICSendDatapointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSendDatapointViewController.m; sourceTree = "<group>"; };
 		202B0A35185F7EF4003424D5 /* influx-client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "influx-client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,7 +55,6 @@
 		202B0A59185F7EF4003424D5 /* influx-clientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "influx-clientTests-Info.plist"; sourceTree = "<group>"; };
 		202B0A5B185F7EF4003424D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		202B0A5D185F7EF4003424D5 /* influx_clientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = influx_clientTests.m; sourceTree = "<group>"; };
-		208CCD681860C94100D4E02D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7B4496BC647446E48D0D21DA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0D9EE73990447BF819AAC11 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,7 +121,7 @@
 			children = (
 				202B0A47185F7EF4003424D5 /* ICAppDelegate.h */,
 				202B0A48185F7EF4003424D5 /* ICAppDelegate.m */,
-				208CCD681860C94100D4E02D /* Main.storyboard */,
+				2001C1EC1862339400BE9E8E /* Main.storyboard */,
 				202B0A4A185F7EF4003424D5 /* Images.xcassets */,
 				202B0A3F185F7EF4003424D5 /* Supporting Files */,
 				2011797B1860DAAC008FEFC5 /* ICSendDatapointViewController.h */,
@@ -226,6 +227,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 202B0A2C185F7EF4003424D5;
 			productRefGroup = 202B0A36185F7EF4003424D5 /* Products */;
@@ -243,7 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				208CCD691860C94100D4E02D /* Main.storyboard in Resources */,
+				2001C1EA1862339400BE9E8E /* Main.storyboard in Resources */,
 				202B0A43185F7EF4003424D5 /* InfoPlist.strings in Resources */,
 				202B0A4B185F7EF4003424D5 /* Images.xcassets in Resources */,
 			);
@@ -322,6 +324,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2001C1EC1862339400BE9E8E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2001C1ED1862339B00BE9E8E /* Base */,
+				2001C1F5186235FD00BE9E8E /* en */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		202B0A41185F7EF4003424D5 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

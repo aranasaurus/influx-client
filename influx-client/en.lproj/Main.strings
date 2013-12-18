@@ -1,0 +1,18 @@
+
+/* Class = "IBUITextField"; placeholder = "Key..."; ObjectID = "1Wi-ws-QK7"; */
+"1Wi-ws-QK7.placeholder" = "Key...";
+
+/* Class = "IBUITextField"; placeholder = "Series name..."; ObjectID = "GkB-cc-4a3"; */
+"GkB-cc-4a3.placeholder" = "Series name...";
+
+/* Class = "IBUIViewController"; title = "Send Datapoint"; ObjectID = "UjI-8m-9P0"; */
+"UjI-8m-9P0.title" = "Send Datapoint";
+
+/* Class = "IBUIButton"; normalTitle = "Send"; ObjectID = "coM-9Y-7DE"; */
+"coM-9Y-7DE.normalTitle" = "Send";
+
+/* Class = "IBUITextField"; placeholder = "Value..."; ObjectID = "kgh-Y8-CDi"; */
+"kgh-Y8-CDi.placeholder" = "Value...";
+
+/* Class = "IBUILabel"; text = "Influx DB Client!"; ObjectID = "zLy-zA-2ib"; */
+"zLy-zA-2ib.text" = "Influx DB Client!";
