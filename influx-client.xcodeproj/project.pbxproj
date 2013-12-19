@@ -23,6 +23,7 @@
 		202B0A54185F7EF4003424D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 202B0A3C185F7EF4003424D5 /* UIKit.framework */; };
 		202B0A5C185F7EF4003424D5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 202B0A5A185F7EF4003424D5 /* InfoPlist.strings */; };
 		202B0A5E185F7EF4003424D5 /* influx_clientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 202B0A5D185F7EF4003424D5 /* influx_clientTests.m */; };
+		20D0499C1863A52900BE12F6 /* ICURLConnectionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D0499B1863A52900BE12F6 /* ICURLConnectionDelegate.m */; };
 		DF6012FFCB114964944B92A8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4496BC647446E48D0D21DA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +40,7 @@
 /* Begin PBXFileReference section */
 		2001C1ED1862339B00BE9E8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2001C1F5186235FD00BE9E8E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		2001C20518623B4C00BE9E8E /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2001C20518623B4C00BE9E8E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2001C20618623E1F00BE9E8E /* ICInfluxDbClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICInfluxDbClient.h; sourceTree = "<group>"; };
 		2001C20718623E1F00BE9E8E /* ICInfluxDbClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICInfluxDbClient.m; sourceTree = "<group>"; };
 		2011797B1860DAAC008FEFC5 /* ICSendDatapointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSendDatapointViewController.h; sourceTree = "<group>"; };
@@ -60,6 +61,8 @@
 		202B0A59185F7EF4003424D5 /* influx-clientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "influx-clientTests-Info.plist"; sourceTree = "<group>"; };
 		202B0A5B185F7EF4003424D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		202B0A5D185F7EF4003424D5 /* influx_clientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = influx_clientTests.m; sourceTree = "<group>"; };
+		20D0499A1863A52900BE12F6 /* ICURLConnectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICURLConnectionDelegate.h; sourceTree = "<group>"; };
+		20D0499B1863A52900BE12F6 /* ICURLConnectionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICURLConnectionDelegate.m; sourceTree = "<group>"; };
 		7B4496BC647446E48D0D21DA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0D9EE73990447BF819AAC11 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +137,8 @@
 				2001C20318623A1600BE9E8E /* Localizable.strings */,
 				2001C20618623E1F00BE9E8E /* ICInfluxDbClient.h */,
 				2001C20718623E1F00BE9E8E /* ICInfluxDbClient.m */,
+				20D0499A1863A52900BE12F6 /* ICURLConnectionDelegate.h */,
+				20D0499B1863A52900BE12F6 /* ICURLConnectionDelegate.m */,
 			);
 			path = "influx-client";
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 				2001C20818623E1F00BE9E8E /* ICInfluxDbClient.m in Sources */,
 				2011797D1860DAAC008FEFC5 /* ICSendDatapointViewController.m in Sources */,
 				202B0A49185F7EF4003424D5 /* ICAppDelegate.m in Sources */,
+				20D0499C1863A52900BE12F6 /* ICURLConnectionDelegate.m in Sources */,
 				202B0A45185F7EF4003424D5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
