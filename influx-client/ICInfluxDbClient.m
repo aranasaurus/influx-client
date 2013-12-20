@@ -31,7 +31,7 @@
     }
 }
 
-- (void) writePoints:(NSMutableArray *)points toSeries:(NSString *)seriesName withColumns:(NSMutableArray *)columns onSuccess:(void (^)(NSMutableData *response))success onFailure:(void (^)(NSError *error))failure
+- (void) writePoints:(NSArray *)points toSeries:(NSString *)seriesName withColumns:(NSArray *)columns onSuccess:(void (^)(NSMutableData *response))success onFailure:(void (^)(NSError *error))failure
 {
     // prepare JSON array
     NSMutableArray *mutablePayload = [NSMutableArray new];
@@ -62,8 +62,6 @@
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:jsonData];
-
-    // prepare the NSURLConnectionDataDelegate
 
     // initialize a connection from request, and start it
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:[[ICURLConnectionDelegate alloc] initWithSuccessBlock:success andFailureBlock:failure]];

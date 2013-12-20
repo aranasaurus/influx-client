@@ -7,3 +7,5 @@
 */
 
 "missingFieldToast" = "Enter all 3 fields!";
+"successfulPostToast" = "Point sent!";
+"failedPostToast" = "Failure; see logs.";

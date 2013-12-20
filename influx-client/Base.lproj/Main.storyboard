@@ -23,7 +23,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Key..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Wi-ws-QK7">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Wi-ws-QK7">
                                 <rect key="frame" x="50" y="220" width="220" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -55,9 +55,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="keyField" destination="1Wi-ws-QK7" id="KyK-1t-K8m"/>
                         <outlet property="sendButton" destination="coM-9Y-7DE" id="rLs-gR-Vkt"/>
                         <outlet property="seriesField" destination="GkB-cc-4a3" id="qiK-uA-HSC"/>
+                        <outlet property="typeField" destination="1Wi-ws-QK7" id="lpo-X2-FSa"/>
                         <outlet property="valueField" destination="kgh-Y8-CDi" id="fe6-Dj-fMg"/>
                     </connections>
                 </viewController>
