@@ -23,7 +23,8 @@
     ICInfluxDbClient *client;
 }
 
-// InfluxDB Settings (TODO: make these app preferences)
+// InfluxDB Settings
+// (TODO: make these app preferences? that would still leave columns as un-modifiable during runtime...)
 static NSString* const INFLUX_HOST = @"";
 static int const INFLUX_PORT = 1234;
 static NSString* const INFLUX_USER = @"";
