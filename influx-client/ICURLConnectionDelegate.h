@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface ICURLConnectionDelegate : NSObject <NSURLConnectionDataDelegate>
-- (id)init __attribute__((unavailable("init is unavailable, use initWithHost:port:user:pass:dbName:")));
+- (id)init __attribute__((unavailable("init is unavailable, use initWithSuccessBlock:andFailureBlock:")));
 - (id)initWithSuccessBlock:(void (^)(NSMutableData *response))success andFailureBlock:(void (^)(NSError *error))failure;
 @end
