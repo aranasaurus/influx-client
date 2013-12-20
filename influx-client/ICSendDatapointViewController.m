@@ -88,7 +88,13 @@ static locale_t const locale = (locale_t)NULL;
         // add fields in the order shown in [self getColumnsArray]
         [point addObject:[self iso8601DateStringFromDate:[NSDate date]]];
         [point addObject:self.typeField.text];
-        [point addObject:self.valueField.text];
+        NSNumber *numericVal = [self numericFromString:self.typeField.text];
+
+        if (numericVal) {
+            [point addObject:numericVal];
+        } else {
+            [point addObject:self.valueField.text];
+        }
 
         // write point!
         [client writePoints:@[point]
@@ -134,6 +140,12 @@ static locale_t const locale = (locale_t)NULL;
 
     strftime_l(buf, 255, formatString, local, locale);
     return [NSString stringWithFormat:@"%s", buf];
+}
+
+- (NSNumber *)numericFromString:(NSString *)str {
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    NSNumber *number = [formatter numberFromString:str];
+    return number; // If the string is not numeric, number will be nil
 }
 
 #pragma mark -

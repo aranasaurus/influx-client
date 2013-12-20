@@ -50,7 +50,7 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload options:0 error:&anError];
 
     if (!jsonData && anError) {
-        NSLog(@"There was an error building JSON: %@", anError);
+        failure(anError);
         return;
     }
 
