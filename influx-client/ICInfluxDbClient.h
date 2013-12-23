@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class AFHTTPRequestOperation;
-
 @interface ICInfluxDbClient : NSObject
 - (id)init __attribute__((unavailable("init is unavailable, use initWithHost:port:user:pass:dbName:")));
 - (id)initWithHost:(NSString *)host port:(int)port user:(NSString *)user pass:(NSString *)pass dbName:(NSString *)dbName;
