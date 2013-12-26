@@ -31,7 +31,7 @@
     }
 }
 
-- (void) writePoints:(NSArray *)points toSeries:(NSString *)seriesName withColumns:(NSArray *)columns onSuccess:(void (^)(NSMutableData *response))success onFailure:(void (^)(NSError *error))failure
+- (void) writePoints:(NSArray *)points toSeries:(NSString *)seriesName withColumns:(NSArray *)columns onSuccess:(void (^)(NSData *response))success onFailure:(void (^)(NSError *error))failure
 {
     // prepare JSON array
     NSMutableArray *mutablePayload = [NSMutableArray new];

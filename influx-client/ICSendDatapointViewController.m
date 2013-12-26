@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UITextField *typeField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+
 @end
 
 @implementation ICSendDatapointViewController {
@@ -101,7 +102,7 @@ static locale_t const locale = (locale_t)NULL;
         [client writePoints:@[point]
                    toSeries:self.seriesField.text
                 withColumns:[self getColumnsArray]
-                  onSuccess:^(NSMutableData *response) {
+                  onSuccess:^(NSData *response) {
                       NSLog(@"On Success block fired with data: %@", [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding]);
                       [self toastMessage:NSLocalizedString(@"successfulPostToast", @"Short message to indicate that the data was sent succesfully.")];
                   }
