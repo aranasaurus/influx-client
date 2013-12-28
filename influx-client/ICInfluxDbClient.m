@@ -9,21 +9,23 @@
 #import "ICInfluxDbClient.h"
 #import "ICURLConnectionDelegate.h"
 
-@implementation ICInfluxDbClient {
-    NSString *host;
-    int port;
-    NSString *user;
-    NSString *pass;
-    NSString *dbName;
-}
+@interface ICInfluxDbClient ()
+@property (copy, nonatomic) NSString *host;
+@property (assign, nonatomic) int port;
+@property (copy, nonatomic) NSString *user;
+@property (copy, nonatomic) NSString *pass;
+@property (copy, nonatomic) NSString *dbName;
+@end
+
+@implementation ICInfluxDbClient
 
 - (id)initWithHost:(NSString *)aHost port:(int)aPort user:(NSString *)aUser pass:(NSString *)aPass dbName:(NSString *)aDbName {
     if (self = [super init]) {
-        host = aHost;
-        port = aPort;
-        user = aUser;
-        pass = aPass;
-        dbName = aDbName;
+        self.host = aHost;
+        self.port = aPort;
+        self.user = aUser;
+        self.pass = aPass;
+        self.dbName = aDbName;
 
         return self;
     } else {
@@ -31,7 +33,7 @@
     }
 }
 
-- (void) writePoints:(NSArray *)points toSeries:(NSString *)seriesName withColumns:(NSArray *)columns onSuccess:(void (^)(NSMutableData *response))success onFailure:(void (^)(NSError *error))failure
+- (void) writePoints:(NSArray *)points toSeries:(NSString *)seriesName withColumns:(NSArray *)columns onSuccess:(void (^)(NSData *response))success onFailure:(void (^)(NSError *error))failure
 {
     // prepare JSON array
     NSMutableArray *mutablePayload = [NSMutableArray new];
@@ -70,7 +72,7 @@
 
 - (NSString *)getUrl:(NSString *)action
 {
-    return [NSString stringWithFormat:@"http://%@:%d/db/%@/%@?u=%@&p=%@", host, port, dbName, action, user, pass];
+    return [NSString stringWithFormat:@"http://%@:%d/db/%@/%@?u=%@&p=%@", self.host, self.port, self.dbName, action, self.user, self.pass];
 }
 
 @end

@@ -10,5 +10,5 @@
 
 @interface ICURLConnectionDelegate : NSObject <NSURLConnectionDataDelegate>
 - (id)init __attribute__((unavailable("init is unavailable, use initWithSuccessBlock:andFailureBlock:")));
-- (id)initWithSuccessBlock:(void (^)(NSMutableData *response))success andFailureBlock:(void (^)(NSError *error))failure;
+- (id)initWithSuccessBlock:(void (^)(NSData *response))success andFailureBlock:(void (^)(NSError *error))failure;
 @end

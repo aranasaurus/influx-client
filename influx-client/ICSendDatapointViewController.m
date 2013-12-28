@@ -16,12 +16,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UITextField *typeField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (strong, nonatomic) MBProgressHUD *HUD;
+@property (strong, nonatomic) ICInfluxDbClient *client;
 @end
 
-@implementation ICSendDatapointViewController {
-    MBProgressHUD *HUD;
-    ICInfluxDbClient *client;
-}
+@implementation ICSendDatapointViewController
 
 // InfluxDB Settings
 // (TODO: make these app preferences? that would still leave columns as un-modifiable during runtime...)
@@ -55,7 +54,7 @@ static locale_t const locale = (locale_t)NULL;
     self.typeField.delegate = self;
     self.valueField.delegate = self;
 
-    client = [[ICInfluxDbClient alloc] initWithHost:INFLUX_HOST port:INFLUX_PORT user:INFLUX_USER pass:INFLUX_PASS dbName:INFLUX_DB_NAME];
+    self.client = [[ICInfluxDbClient alloc] initWithHost:INFLUX_HOST port:INFLUX_PORT user:INFLUX_USER pass:INFLUX_PASS dbName:INFLUX_DB_NAME];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,10 +70,10 @@ static locale_t const locale = (locale_t)NULL;
     if (sender != self.sendButton) return;
 
     // The hud will disable all input on the view (use the highest view possible in the view hierarchy)
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
     // Regiser for HUD callbacks so we can remove it from the window at the right time
-    HUD.delegate = self;
+    self.HUD.delegate = self;
 
     [self validateAndSend];
 }
@@ -98,10 +97,10 @@ static locale_t const locale = (locale_t)NULL;
         }
 
         // write point!
-        [client writePoints:@[point]
+        [self.client writePoints:@[point]
                    toSeries:self.seriesField.text
                 withColumns:[self getColumnsArray]
-                  onSuccess:^(NSMutableData *response) {
+                  onSuccess:^(NSData *response) {
                       NSLog(@"On Success block fired with data: %@", [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding]);
                       [self toastMessage:NSLocalizedString(@"successfulPostToast", @"Short message to indicate that the data was sent succesfully.")];
                   }
@@ -117,11 +116,11 @@ static locale_t const locale = (locale_t)NULL;
 
 - (void)toastMessage:(NSString *)message
 {
-    HUD.mode = MBProgressHUDModeText;
-    HUD.labelText = message;
-    HUD.margin = 10.f;
-    HUD.yOffset = 150.f;
-    [HUD hide:YES afterDelay:2];
+    self.HUD.mode = MBProgressHUDModeText;
+    self.HUD.labelText = message;
+    self.HUD.margin = 10.f;
+    self.HUD.yOffset = 150.f;
+    [self.HUD hide:YES afterDelay:2];
 }
 
 - (NSArray*)getColumnsArray
