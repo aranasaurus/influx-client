@@ -165,4 +165,17 @@ static locale_t const locale = (locale_t)NULL;
     hud = nil;
 }
 
+#pragma mark -
+#pragma mark ICServerSettingsViewControllerDelegate (and related) methods
+
+- (void)settingsViewControllerDidFinish:(ICServerSettingsViewController *)controller {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"flip"]) {
+        [[segue destinationViewController] setDelegate:self];
+    }
+}
+
 @end
