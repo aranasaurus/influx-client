@@ -16,6 +16,11 @@
 @interface ICServerSettingsViewController : UIViewController
 
 @property (weak, nonatomic) id<ICServerSettingsViewControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UITextField *hostTextField;
+@property (weak, nonatomic) IBOutlet UITextField *portTextField;
+@property (weak, nonatomic) IBOutlet UITextField *dbNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
 - (IBAction)done:(id)sender;
 

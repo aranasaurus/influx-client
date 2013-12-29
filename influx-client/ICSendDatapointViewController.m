@@ -22,14 +22,6 @@
 
 @implementation ICSendDatapointViewController
 
-// InfluxDB Settings
-// (TODO: make these app preferences? that would still leave columns as un-modifiable during runtime...)
-static NSString* const INFLUX_HOST = @"";
-static int const INFLUX_PORT = 1234;
-static NSString* const INFLUX_USER = @"";
-static NSString* const INFLUX_PASS = @"";
-static NSString* const INFLUX_DB_NAME = @"";
-
 // used for NSDate -> NSString formatting
 static char const* formatString = "%FT%T%z";
 static locale_t const locale = (locale_t)NULL;
@@ -54,7 +46,6 @@ static locale_t const locale = (locale_t)NULL;
     self.typeField.delegate = self;
     self.valueField.delegate = self;
 
-    self.client = [[ICInfluxDbClient alloc] initWithHost:INFLUX_HOST port:INFLUX_PORT user:INFLUX_USER pass:INFLUX_PASS dbName:INFLUX_DB_NAME];
 }
 
 - (void)didReceiveMemoryWarning
