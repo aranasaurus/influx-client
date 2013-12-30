@@ -8,7 +8,7 @@
 
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "ICSendDatapointViewController.h"
-#import "ICInfluxDbClient.h"
+#import "ICAppDelegate.h"
 #import <xlocale.h>
 
 @interface ICSendDatapointViewController ()
@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *typeField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (strong, nonatomic) MBProgressHUD *HUD;
-@property (strong, nonatomic) ICInfluxDbClient *client;
 @end
 
 @implementation ICSendDatapointViewController
@@ -88,18 +87,19 @@ static locale_t const locale = (locale_t)NULL;
         }
 
         // write point!
-        [self.client writePoints:@[point]
-                   toSeries:self.seriesField.text
-                withColumns:[self getColumnsArray]
-                  onSuccess:^(NSData *response) {
-                      NSLog(@"On Success block fired with data: %@", [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding]);
-                      [self toastMessage:NSLocalizedString(@"successfulPostToast", @"Short message to indicate that the data was sent succesfully.")];
-                  }
-                  onFailure:^(NSError *error) {
-                      NSLog(@"On Failure block fired with error: %@", error);
-                      [self toastMessage:NSLocalizedString(@"failedPostToast", @"Short message to indicate that there was an error which can be seen in the logs.")];
-                  }
-         ];
+        ICAppDelegate *appDelegate = (ICAppDelegate *)[UIApplication sharedApplication].delegate;
+        [appDelegate.dbClient writePoints:@[point]
+                                 toSeries:self.seriesField.text
+                              withColumns:[self getColumnsArray]
+                                onSuccess:^(NSData *response) {
+                                    NSLog(@"On Success block fired with data: %@", [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding]);
+                                    [self toastMessage:NSLocalizedString(@"successfulPostToast", @"Short message to indicate that the data was sent succesfully.")];
+                                }
+                                onFailure:^(NSError *error) {
+                                    NSLog(@"On Failure block fired with error: %@", error);
+                                    [self toastMessage:NSLocalizedString(@"failedPostToast", @"Short message to indicate that there was an error which can be seen in the logs.")];
+                                }
+        ];
     } else {
         [self toastMessage:NSLocalizedString(@"missingFieldToast", @"Let the user know, in as few words as possible, that they must enter something into all three fields.")];
     }

@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class ICInfluxDbClient;
+#import "ICInfluxDbClient.h"
 
 @interface ICAppDelegate : UIResponder <UIApplicationDelegate>
 

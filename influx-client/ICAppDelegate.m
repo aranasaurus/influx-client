@@ -7,7 +7,6 @@
 //
 
 #import "ICAppDelegate.h"
-#import "ICInfluxDbClient.h"
 
 @implementation ICAppDelegate
 
