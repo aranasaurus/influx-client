@@ -31,6 +31,17 @@
 	// Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.hostTextField.text = [defaults objectForKey:IC_HOST_KEY];
+    self.portTextField.text = [[defaults objectForKey:IC_PORT_KEY] stringValue];
+    self.dbNameTextField.text = [defaults objectForKey:IC_DBNAME_KEY];
+    self.usernameTextField.text = [defaults objectForKey:IC_USER_KEY];
+    self.passwordTextField.text = [defaults objectForKey:IC_PASS_KEY];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
