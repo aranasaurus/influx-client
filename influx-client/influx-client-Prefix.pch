@@ -13,4 +13,11 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+    static NSString *const IC_HOST_KEY = @"dbHost";
+    static NSString *const IC_PORT_KEY = @"dbPort";
+    static NSString *const IC_USER_KEY = @"dbUsername";
+    static NSString *const IC_PASS_KEY = @"dbPassword";
+    static NSString *const IC_DBNAME_KEY = @"dbName";
+    static NSString *const IC_SERIES_KEY = @"dbSeriesName";
 #endif

@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "ICServerSettingsViewController.h"
 
-@interface ICSendDatapointViewController : UIViewController <MBProgressHUDDelegate, UITextFieldDelegate>
+@interface ICSendDatapointViewController : UIViewController <MBProgressHUDDelegate, UITextFieldDelegate, ICServerSettingsViewControllerDelegate>
 
 @end

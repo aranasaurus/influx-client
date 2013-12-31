@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ICInfluxDbClient.h"
 
 @interface ICAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) ICInfluxDbClient *dbClient;
 
+- (void)loadClientFromDefaults;
 @end

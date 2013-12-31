@@ -12,7 +12,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self loadClientFromDefaults];
     return YES;
+}
+
+- (void)loadClientFromDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *host = [defaults objectForKey:IC_HOST_KEY];
+    NSInteger port = [defaults integerForKey:IC_PORT_KEY];
+    NSString *user = [defaults objectForKey:IC_USER_KEY];
+    NSString *pass = [defaults objectForKey:IC_PASS_KEY];
+    NSString *dbName = [defaults objectForKey:IC_DBNAME_KEY];
+    if (host && port > 0 && user && pass && dbName) {
+        self.dbClient = [[ICInfluxDbClient alloc] initWithHost:host port:port user:user pass:pass dbName:dbName];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

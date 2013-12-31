@@ -8,27 +8,20 @@
 
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "ICSendDatapointViewController.h"
-#import "ICInfluxDbClient.h"
+#import "ICAppDelegate.h"
 #import <xlocale.h>
 
-@interface ICSendDatapointViewController ()
+@interface ICSendDatapointViewController () {
+    float _hudOffset;
+}
 @property (weak, nonatomic) IBOutlet UITextField *seriesField;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UITextField *typeField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (strong, nonatomic) MBProgressHUD *HUD;
-@property (strong, nonatomic) ICInfluxDbClient *client;
 @end
 
 @implementation ICSendDatapointViewController
-
-// InfluxDB Settings
-// (TODO: make these app preferences? that would still leave columns as un-modifiable during runtime...)
-static NSString* const INFLUX_HOST = @"";
-static int const INFLUX_PORT = 1234;
-static NSString* const INFLUX_USER = @"";
-static NSString* const INFLUX_PASS = @"";
-static NSString* const INFLUX_DB_NAME = @"";
 
 // used for NSDate -> NSString formatting
 static char const* formatString = "%FT%T%z";
@@ -51,10 +44,21 @@ static locale_t const locale = (locale_t)NULL;
     [super viewDidLoad];
 
     self.seriesField.delegate = self;
+    self.seriesField.text = [[NSUserDefaults standardUserDefaults] objectForKey:IC_SERIES_KEY];
     self.typeField.delegate = self;
     self.valueField.delegate = self;
 
-    self.client = [[ICInfluxDbClient alloc] initWithHost:INFLUX_HOST port:INFLUX_PORT user:INFLUX_USER pass:INFLUX_PASS dbName:INFLUX_DB_NAME];
+    [self keyboardDismissed];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAppeared) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDismissed) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardDismissed {
+    _hudOffset = 150.0f;
+}
+
+- (void)keyboardAppeared {
+    _hudOffset = 0.0f;
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,19 +100,22 @@ static locale_t const locale = (locale_t)NULL;
             [point addObject:self.valueField.text];
         }
 
+        [[NSUserDefaults standardUserDefaults] setObject:self.seriesField.text forKey:IC_SERIES_KEY];
+
         // write point!
-        [self.client writePoints:@[point]
-                   toSeries:self.seriesField.text
-                withColumns:[self getColumnsArray]
-                  onSuccess:^(NSData *response) {
-                      NSLog(@"On Success block fired with data: %@", [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding]);
-                      [self toastMessage:NSLocalizedString(@"successfulPostToast", @"Short message to indicate that the data was sent succesfully.")];
-                  }
-                  onFailure:^(NSError *error) {
-                      NSLog(@"On Failure block fired with error: %@", error);
-                      [self toastMessage:NSLocalizedString(@"failedPostToast", @"Short message to indicate that there was an error which can be seen in the logs.")];
-                  }
-         ];
+        ICAppDelegate *appDelegate = (ICAppDelegate *)[UIApplication sharedApplication].delegate;
+        [appDelegate.dbClient writePoints:@[point]
+                                 toSeries:self.seriesField.text
+                              withColumns:[self getColumnsArray]
+                                onSuccess:^(NSData *response) {
+                                    NSLog(@"On Success block fired with data: %@", [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding]);
+                                    [self toastMessage:NSLocalizedString(@"successfulPostToast", @"Short message to indicate that the data was sent succesfully.")];
+                                }
+                                onFailure:^(NSError *error) {
+                                    NSLog(@"On Failure block fired with error: %@", error);
+                                    [self toastMessage:NSLocalizedString(@"failedPostToast", @"Short message to indicate that there was an error which can be seen in the logs.")];
+                                }
+        ];
     } else {
         [self toastMessage:NSLocalizedString(@"missingFieldToast", @"Let the user know, in as few words as possible, that they must enter something into all three fields.")];
     }
@@ -119,7 +126,7 @@ static locale_t const locale = (locale_t)NULL;
     self.HUD.mode = MBProgressHUDModeText;
     self.HUD.labelText = message;
     self.HUD.margin = 10.f;
-    self.HUD.yOffset = 150.f;
+    self.HUD.yOffset = _hudOffset;
     [self.HUD hide:YES afterDelay:2];
 }
 
@@ -151,6 +158,10 @@ static locale_t const locale = (locale_t)NULL;
 #pragma mark -
 #pragma mark UITextFieldDelegate methods
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
@@ -163,6 +174,19 @@ static locale_t const locale = (locale_t)NULL;
     // Remove HUD from screen when the HUD was hidden
     [hud removeFromSuperview];
     hud = nil;
+}
+
+#pragma mark -
+#pragma mark ICServerSettingsViewControllerDelegate (and related) methods
+
+- (void)settingsViewControllerDidFinish:(ICServerSettingsViewController *)controller {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"flip"]) {
+        [[segue destinationViewController] setDelegate:self];
+    }
 }
 
 @end
