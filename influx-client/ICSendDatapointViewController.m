@@ -42,6 +42,7 @@ static locale_t const locale = (locale_t)NULL;
     [super viewDidLoad];
 
     self.seriesField.delegate = self;
+    self.seriesField.text = [[NSUserDefaults standardUserDefaults] objectForKey:IC_SERIES_KEY];
     self.typeField.delegate = self;
     self.valueField.delegate = self;
 
@@ -85,6 +86,8 @@ static locale_t const locale = (locale_t)NULL;
         } else {
             [point addObject:self.valueField.text];
         }
+
+        [[NSUserDefaults standardUserDefaults] setObject:self.seriesField.text forKey:IC_SERIES_KEY];
 
         // write point!
         ICAppDelegate *appDelegate = (ICAppDelegate *)[UIApplication sharedApplication].delegate;
