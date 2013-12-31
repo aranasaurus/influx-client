@@ -42,6 +42,10 @@
     self.passwordTextField.text = [defaults objectForKey:IC_PASS_KEY];
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
