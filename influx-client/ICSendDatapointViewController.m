@@ -11,7 +11,9 @@
 #import "ICAppDelegate.h"
 #import <xlocale.h>
 
-@interface ICSendDatapointViewController ()
+@interface ICSendDatapointViewController () {
+    float _hudOffset;
+}
 @property (weak, nonatomic) IBOutlet UITextField *seriesField;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UITextField *typeField;
@@ -46,6 +48,17 @@ static locale_t const locale = (locale_t)NULL;
     self.typeField.delegate = self;
     self.valueField.delegate = self;
 
+    [self keyboardDismissed];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAppeared) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDismissed) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardDismissed {
+    _hudOffset = 150.0f;
+}
+
+- (void)keyboardAppeared {
+    _hudOffset = 0.0f;
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,7 +126,7 @@ static locale_t const locale = (locale_t)NULL;
     self.HUD.mode = MBProgressHUDModeText;
     self.HUD.labelText = message;
     self.HUD.margin = 10.f;
-    self.HUD.yOffset = 150.f;
+    self.HUD.yOffset = _hudOffset;
     [self.HUD hide:YES afterDelay:2];
 }
 

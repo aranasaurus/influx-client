@@ -102,7 +102,6 @@
     hud.mode = MBProgressHUDModeText;
     hud.labelText = message;
     hud.margin = 10.f;
-    hud.yOffset = 150.f;
     [hud hide:YES afterDelay:2];
 }
 @end
