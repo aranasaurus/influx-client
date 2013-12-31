@@ -71,21 +71,21 @@
         [defaults setObject:port forKey:IC_PORT_KEY];
     }
 
-    if (!self.dbNameTextField.text) {
+    if ([self.dbNameTextField.text isEqualToString:@""]) {
         [self toastMessage:@"Please enter a database name."];
         return;
     } else {
         [defaults setObject:self.dbNameTextField.text forKey:IC_DBNAME_KEY];
     }
 
-    if (!self.usernameTextField.text) {
+    if ([self.usernameTextField.text isEqualToString:@""]) {
         [self toastMessage:@"Please enter a username."];
         return;
     } else {
         [defaults setObject:self.usernameTextField.text forKey:IC_USER_KEY];
     }
 
-    if (!self.passwordTextField.text) {
+    if ([self.passwordTextField.text isEqualToString:@""]) {
         [self toastMessage:@"Please enter a password."];
         return;
     } else {
