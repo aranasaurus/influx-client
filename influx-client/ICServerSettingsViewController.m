@@ -99,6 +99,7 @@
 
 - (void)toastMessage:(NSString *)message {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.userInteractionEnabled = NO;
     hud.mode = MBProgressHUDModeText;
     hud.labelText = message;
     hud.margin = 10.f;

@@ -75,6 +75,7 @@ static locale_t const locale = (locale_t)NULL;
 
     // The hud will disable all input on the view (use the highest view possible in the view hierarchy)
     self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.HUD.userInteractionEnabled = NO;
 
     // Regiser for HUD callbacks so we can remove it from the window at the right time
     self.HUD.delegate = self;
@@ -160,6 +161,7 @@ static locale_t const locale = (locale_t)NULL;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+    [self.HUD hide:YES];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
