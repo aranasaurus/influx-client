@@ -17,7 +17,7 @@
     float _hudOffset;
 }
 @property (weak, nonatomic) IBOutlet HTAutocompleteTextField *seriesField;
-@property (weak, nonatomic) IBOutlet HTAutocompleteTextField *valueField;
+@property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet HTAutocompleteTextField *typeField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (strong, nonatomic) MBProgressHUD *HUD;
@@ -205,7 +205,6 @@ static locale_t const locale = (locale_t)NULL;
 - (void)hudWasHidden:(MBProgressHUD *)hud {
     // Remove HUD from screen when the HUD was hidden
     [hud removeFromSuperview];
-    hud = nil;
 }
 
 #pragma mark -
