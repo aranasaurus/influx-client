@@ -9,14 +9,16 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "ICSendDatapointViewController.h"
 #import "ICAppDelegate.h"
+#import "ICAutocompleteManager.h"
 #import <xlocale.h>
+#import <HTAutocompleteTextField/HTAutocompleteTextField.h>
 
 @interface ICSendDatapointViewController () {
     float _hudOffset;
 }
-@property (weak, nonatomic) IBOutlet UITextField *seriesField;
-@property (weak, nonatomic) IBOutlet UITextField *valueField;
-@property (weak, nonatomic) IBOutlet UITextField *typeField;
+@property (weak, nonatomic) IBOutlet HTAutocompleteTextField *seriesField;
+@property (weak, nonatomic) IBOutlet HTAutocompleteTextField *valueField;
+@property (weak, nonatomic) IBOutlet HTAutocompleteTextField *typeField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (strong, nonatomic) MBProgressHUD *HUD;
 @end
@@ -42,6 +44,8 @@ static locale_t const locale = (locale_t)NULL;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [HTAutocompleteTextField setDefaultAutocompleteDataSource:[ICAutocompleteManager sharedManager]];
 
     self.seriesField.delegate = self;
     self.seriesField.text = [[NSUserDefaults standardUserDefaults] objectForKey:IC_SERIES_KEY];
@@ -69,6 +73,32 @@ static locale_t const locale = (locale_t)NULL;
 
 #pragma mark -
 #pragma mark IBActions
+
+- (IBAction)clearAutocompleteCache:(id)sender {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:IC_AUTOCOMPLETE_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self toastMessage:@"Cleared!"];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    NSDictionary *completesDict = [[NSUserDefaults standardUserDefaults] objectForKey:IC_AUTOCOMPLETE_KEY];
+    if (!completesDict) {
+        completesDict = [NSDictionary dictionary];
+    }
+
+    NSArray *completesArray = completesDict[textField.accessibilityLabel];
+    if (!completesArray) {
+        completesArray = [NSArray array];
+    }
+
+    NSMutableSet *mutableCompletes = [NSMutableSet setWithArray:completesArray];
+    [mutableCompletes addObject:textField.text];
+
+    NSMutableDictionary *mutableDictionary = [completesDict mutableCopy];
+    mutableDictionary[textField.accessibilityLabel] = [mutableCompletes allObjects];
+    [[NSUserDefaults standardUserDefaults] setObject:mutableDictionary forKey:IC_AUTOCOMPLETE_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 - (IBAction)sendWasTapped:(id)sender {
     if (sender != self.sendButton) return;
