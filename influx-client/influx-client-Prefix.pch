@@ -20,4 +20,5 @@
     static NSString *const IC_PASS_KEY = @"dbPassword";
     static NSString *const IC_DBNAME_KEY = @"dbName";
     static NSString *const IC_SERIES_KEY = @"dbSeriesName";
+    static NSString *const IC_AUTOCOMPLETE_KEY = @"autocompleteDictionary";
 #endif

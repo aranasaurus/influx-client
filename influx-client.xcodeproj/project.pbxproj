@@ -25,6 +25,7 @@
 		202B0A5E185F7EF4003424D5 /* influx_clientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 202B0A5D185F7EF4003424D5 /* influx_clientTests.m */; };
 		20D0499C1863A52900BE12F6 /* ICURLConnectionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D0499B1863A52900BE12F6 /* ICURLConnectionDelegate.m */; };
 		949C10B2186F86190040DFE4 /* ICServerSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 949C10B1186F86190040DFE4 /* ICServerSettingsViewController.m */; };
+		94AB80331878D04C006A16F5 /* ICAutocompleteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AB80321878D04C006A16F5 /* ICAutocompleteManager.m */; };
 		DF6012FFCB114964944B92A8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4496BC647446E48D0D21DA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,8 @@
 		7B4496BC647446E48D0D21DA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		949C10B0186F86190040DFE4 /* ICServerSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICServerSettingsViewController.h; sourceTree = "<group>"; };
 		949C10B1186F86190040DFE4 /* ICServerSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICServerSettingsViewController.m; sourceTree = "<group>"; };
+		94AB80311878D04C006A16F5 /* ICAutocompleteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICAutocompleteManager.h; sourceTree = "<group>"; };
+		94AB80321878D04C006A16F5 /* ICAutocompleteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICAutocompleteManager.m; sourceTree = "<group>"; };
 		F0D9EE73990447BF819AAC11 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +133,8 @@
 		202B0A3E185F7EF4003424D5 /* influx-client */ = {
 			isa = PBXGroup;
 			children = (
+				94AB80311878D04C006A16F5 /* ICAutocompleteManager.h */,
+				94AB80321878D04C006A16F5 /* ICAutocompleteManager.m */,
 				202B0A47185F7EF4003424D5 /* ICAppDelegate.h */,
 				202B0A48185F7EF4003424D5 /* ICAppDelegate.m */,
 				2001C1EC1862339400BE9E8E /* Main.storyboard */,
@@ -323,6 +328,7 @@
 				202B0A49185F7EF4003424D5 /* ICAppDelegate.m in Sources */,
 				20D0499C1863A52900BE12F6 /* ICURLConnectionDelegate.m in Sources */,
 				949C10B2186F86190040DFE4 /* ICServerSettingsViewController.m in Sources */,
+				94AB80331878D04C006A16F5 /* ICAutocompleteManager.m in Sources */,
 				202B0A45185F7EF4003424D5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
