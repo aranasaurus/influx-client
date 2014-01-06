@@ -10,6 +10,8 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "ICServerSettingsViewController.h"
 
-@interface ICSendDatapointViewController : UIViewController <MBProgressHUDDelegate, UITextFieldDelegate, ICServerSettingsViewControllerDelegate>
+@interface ICSendDatapointViewController : UIViewController <MBProgressHUDDelegate, UITextFieldDelegate,
+                                                             ICServerSettingsViewControllerDelegate, UITableViewDataSource,
+                                                             UITableViewDelegate>
 
 @end

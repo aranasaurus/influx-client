@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet HTAutocompleteTextField *typeField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (strong, nonatomic) MBProgressHUD *HUD;
+@property (weak, nonatomic) IBOutlet UITableView *recentItemsTableView;
+@property (strong, nonatomic, readonly) NSArray *recentItems;
 @end
 
 @implementation ICSendDatapointViewController
@@ -80,6 +82,13 @@ static locale_t const locale = (locale_t)NULL;
     [self toastMessage:@"Cleared!"];
 }
 
+- (IBAction)clearRecentItems:(id)sender {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:IC_RECENT_ITEMS_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self toastMessage:@"Cleared!"];
+    [self.recentItemsTableView reloadData];
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSDictionary *completesDict = [[NSUserDefaults standardUserDefaults] objectForKey:IC_AUTOCOMPLETE_KEY];
     if (!completesDict) {
@@ -134,13 +143,25 @@ static locale_t const locale = (locale_t)NULL;
         [[NSUserDefaults standardUserDefaults] setObject:self.seriesField.text forKey:IC_SERIES_KEY];
 
         // write point!
+        NSArray *columns = @[ @"timestamp", @"type", @"value" ];
+        NSString *series = self.seriesField.text;
         ICAppDelegate *appDelegate = (ICAppDelegate *)[UIApplication sharedApplication].delegate;
         [appDelegate.dbClient writePoints:@[point]
-                                 toSeries:self.seriesField.text
-                              withColumns:[self getColumnsArray]
+                                 toSeries:series
+                              withColumns:columns
                                 onSuccess:^(NSData *response) {
                                     NSLog(@"On Success block fired with data: %@", [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding]);
                                     [self toastMessage:NSLocalizedString(@"successfulPostToast", @"Short message to indicate that the data was sent succesfully.")];
+                                    NSMutableArray *mutableRecents = [self.recentItems mutableCopy];
+                                    if (!mutableRecents) {
+                                        mutableRecents = [NSMutableArray array];
+                                    }
+                                    NSMutableDictionary *mutablePoint = [NSMutableDictionary dictionaryWithObjects:point forKeys:columns];
+                                    mutablePoint[@"series"] = series;
+                                    [mutableRecents insertObject:[mutablePoint copy] atIndex:0];
+                                    [[NSUserDefaults standardUserDefaults] setObject:[mutableRecents copy] forKey:IC_RECENT_ITEMS_KEY];
+                                    [[NSUserDefaults standardUserDefaults] synchronize];
+                                    [self.recentItemsTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
                                 }
                                 onFailure:^(NSError *error) {
                                     NSLog(@"On Failure block fired with error: %@", error);
@@ -159,11 +180,6 @@ static locale_t const locale = (locale_t)NULL;
     self.HUD.margin = 10.f;
     self.HUD.yOffset = _hudOffset;
     [self.HUD hide:YES afterDelay:2];
-}
-
-- (NSArray*)getColumnsArray
-{
-    return @[ @"timestamp", @"type", @"value" ];
 }
 
 - (NSString *)iso8601DateStringFromDate:(NSDate *)date {
@@ -218,6 +234,38 @@ static locale_t const locale = (locale_t)NULL;
     if ([[segue identifier] isEqualToString:@"flip"]) {
         [[segue destinationViewController] setDelegate:self];
     }
+}
+
+#pragma mark -
+#pragma mark UITableView Stuff
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.recentItems count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"logCell" forIndexPath:indexPath];
+    UILabel *dateLabel = (UILabel *)[cell viewWithTag:1];
+    UILabel *valueLabel = (UILabel *)[cell viewWithTag:2];
+    UILabel *seriesLabel = (UILabel *)[cell viewWithTag:3];
+
+    NSDictionary *item = self.recentItems[(NSUInteger)indexPath.row];
+    NSString *dateString = [item[@"timestamp"] stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+    dateString = [dateString stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+    dateString = [dateString stringByReplacingCharactersInRange:NSMakeRange(dateString.length-5, 5) withString:@""];
+    dateLabel.text = dateString;
+
+    valueLabel.text = [NSString stringWithFormat:@"%@: %@", item[@"type"], item[@"value"]];
+    seriesLabel.text = item[@"series"];
+
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 53;
+}
+
+- (NSArray *)recentItems {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:IC_RECENT_ITEMS_KEY];
 }
 
 @end
